@@ -16,7 +16,7 @@ public class KafkaProducer {
 
     public boolean sendMessage(String topic, RequestMessage message) {
         try {
-            kafkaTemplate.send(topic, message.body);
+            kafkaTemplate.send(topic, message.body).get();
             String logMessage = MessageFormat.format("Message {1} was sent to topic {0}", topic, message.body);
             logger.info(logMessage);
             return true;

@@ -5,6 +5,8 @@ spring:
       client-id: x.kafka.local
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        max.block.ms: 500
 
 
 management:
