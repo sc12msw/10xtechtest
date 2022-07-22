@@ -1,0 +1,18 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      client-id: x.kafka.local
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+management:
+  server.port: 8091
+  metrics:
+    tags:
+      app: kafka-learning
+  endpoints.web.exposure.include: info, health, prometheus, livenessstate, mappings, metrics
+  endpoint.health.probes.enabled: true
+  health.livenessState.enabled: true
+  health.readinessState.enabled: true
