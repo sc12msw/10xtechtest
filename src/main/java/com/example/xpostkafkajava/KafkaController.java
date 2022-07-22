@@ -21,7 +21,12 @@ public class KafkaController {
             metrics.incrementStatusCode(HttpStatus.BAD_REQUEST);
             return ResponseEntity.badRequest().build();
         }
-        producer.sendMessage(topic, message);
+        Boolean messageSent = producer.sendMessage(topic, message);
+        metrics.incrementMessageSent(messageSent);
+        if (Boolean.FALSE.equals(messageSent)){
+            metrics.incrementStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
+        }
         metrics.incrementStatusCode(HttpStatus.ACCEPTED);
         return ResponseEntity.accepted().build();
     }
